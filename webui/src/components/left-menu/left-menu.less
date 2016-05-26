@@ -1,0 +1,23 @@
+
+body.fullscreen > left-menu > ul > li > button.full-screen {
+  background-image: url(../img/fullscreen-exit.png);
+}
+
+left-menu {
+  left: 0;
+
+  > ul > li > button {
+    &.full-screen {
+      background-image: url(../img/fullscreen.png);
+    }
+    &.zoom-in {
+      background-image: url(../img/zoomin.png);
+    }
+    &.zoom-out {
+      background-image: url(../img/zoomout.png);
+    }
+    &.zoom-to-extent {
+      background-image: url(../img/zoomtoextent.png);
+    }
+  }
+}

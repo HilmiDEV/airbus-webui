@@ -1,0 +1,11 @@
+<i class="fa fa-mouse-pointer"></i>
+<span>Coordinates&nbsp;</span>
+<div class="dropup">
+    <button id="epsgSwitch" type="button" data-toggle="dropdown" ng-bind="mpCtrl.selected"></button>
+    <ul class="dropdown-menu" aria-labelledby="epsgSwitch">
+        <li ng-repeat="code in mpCtrl.projections" ng-class="{active: mpCtrl.selected === code}">
+            <a role="button" ng-click="mpCtrl.selected = code" ng-bind="code"></a>
+        </li>
+    </ul>
+</div>
+<span>&nbsp;:&nbsp;</span>

@@ -1,0 +1,135 @@
+right-panel {
+  .abs-top-right();
+  .size(auto, 100%);
+  .box-shadow(0 0 12px rgba(0, 0, 0, .5));
+  z-index: 4;
+  display: none;
+
+  // Child component
+  // ----------
+
+  > * {
+    .size(450px, 100%);
+    position: relative;
+    display: block;
+    padding-top: 60px;
+
+    // Header
+    // ----------
+
+    > .header {
+      .abs-top-left();
+      .size(100%, 60px);
+      .text-overflow();
+      color: @font-color-light;
+      line-height: 26px;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 17px 60px 17px 75px;
+      border-bottom: 1px solid @main-color-1;
+      background: @main-color-2 no-repeat 20px center;
+      background-size: auto 40px;
+
+      // Header > Dismiss button
+      // ----------
+
+      > button.dismiss {
+        .reset-browser-button();
+        .abs-top-right();
+        .size(60px, 60px);
+        padding: 12px;
+        line-height: 1;
+        font-size: 36px;
+      }
+    }
+
+    // Content
+    // ----------
+
+    > .content {
+      .size(100%, 100%);
+      overflow-x: hidden;
+      overflow-y: auto;
+      color: @font-color-light;
+      background-color: fade(@main-color-2, 80%);
+
+      // Content > Inner
+      // ----------
+
+      > .content-inner {
+        padding: 20px;
+      }
+
+      // Content > Headings
+      // ----------
+
+      h4 {
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+      }
+
+      h5 {
+        font-weight: 400;
+      }
+
+      // Content > Divider
+      // ----------
+
+      div.divider {
+        border-bottom: 1px solid @main-color-1;
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+
+      // Content > Form group
+      // ----------
+
+      div.form-group > .control-label {
+        font-weight: 400;
+        text-align: left;
+
+        &.text-right {
+          text-align: right;
+        }
+      }
+
+      div.mlr15 {
+        margin-right: 15px;
+        margin-left: 15px;
+      }
+
+      div.ml20 {
+        margin-left: 20px;
+      }
+
+      div.mt10 {
+        margin-top: 10px;
+      }
+    }
+
+    // Footer
+    // ----------
+
+    &.has-footer {
+      padding-bottom: 60px;
+    }
+
+    > .footer {
+      .abs-bottom-left();
+      .size(100%, 60px);
+      padding: 12px 20px;
+      border-top: 1px solid @main-color-1;
+      background-color: @main-color-2;
+    }
+  }
+
+  // Specific
+  // -----------
+
+  @import "filters-panel/filters-panel.less";
+  @import "layers-panel/layers-panel.less";
+  @import "process-panel/process-panel.less";
+  @import "settings-panel/settings-panel.less";
+  @import "source-panel/source-panel.less";
+}

@@ -1,0 +1,114 @@
+<div class="header">
+    Process
+    <button type="button" class="dismiss" ng-click="panelCtrl.close()" title="Close the panel">
+        <i class="fa fa-caret-right"></i>
+    </button>
+</div>
+<ul class="tabs">
+    <li ng-class="{active: processCtrl.workflowName === 'wf1'}">
+        <button type="button" ng-click="processCtrl.setWorkflow('wf1', 'pf_workflow')">wf1</button>
+    </li>
+    <li ng-class="{active: processCtrl.workflowName === 'test'}">
+        <button type="button" ng-click="processCtrl.setWorkflow('test', 'pf_workflow_mock')">test</button>
+    </li>
+</ul>
+<div class="content">
+    <div class="content-inner">
+        <!-- Process -->
+        <div class="process">
+            <h4>Process {{processCtrl.workflowName}}</h4>
+            <!-- Process [Not started] -->
+            <div ng-hide="processCtrl.exec" class="text-center">
+                <button type="button" class="btn btn-airbus-alt" ng-click="processCtrl.drawingAoi = !processCtrl.drawingAoi" ng-class="{active: processCtrl.drawingAoi}">
+                    <i class="fa fa-pencil-square-o"></i>
+                    <span ng-hide="processCtrl.aoiExtent">Select an AOI</span>
+                    <span ng-show="processCtrl.aoiExtent">Change AOI</span>
+                </button>
+                <button type="button" class="btn btn-airbus-alt" ng-click="processCtrl.execute()" ng-disabled="!processCtrl.aoiExtent">
+                    <i class="fa fa-play"></i> Start workflow
+                </button>
+            </div>
+            <!-- Process [Running / Paused / Aborted / Failed] -->
+            <div ng-if="processCtrl.exec">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" ng-style="{width: processCtrl.exec.completion + '%'}"
+                         ng-class="{'progress-bar-success': processCtrl.exec.status !== 'failed', 'progress-bar-danger': processCtrl.exec.status === 'failed'}"></div>
+                    <div class="progress-value">{{processCtrl.exec | progress}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-8 dates">
+                        <p>Started : {{processCtrl.exec.start_date | date:'shortTime'}}</p>
+                        <p>Estimated End : {{(processCtrl.estimateEnd(processCtrl.exec) | date:'short') || '---'}}</p>
+                        <p>Duration : ---</p>
+                    </div>
+                    <div class="col-xs-4 text-center">
+                        <button type="button" class="btn btn-block btn-airbus-alt" ng-click="processCtrl.pause()"
+                                ng-show="processCtrl.exec.status === 'running'">
+                            <i class="fa fa-pause"></i> Pause
+                        </button>
+                        <button type="button" class="btn btn-block btn-airbus-alt" ng-click="processCtrl.resume()"
+                                ng-show="processCtrl.exec.status === 'paused'">
+                            <i class="fa fa-pause"></i> Resume
+                        </button>
+                        <button type="button" class="btn btn-block btn-airbus-alt" ng-click="processCtrl.abort()"
+                                ng-show="processCtrl.exec.status === 'running' || processCtrl.exec.status === 'paused'">
+                            <i class="fa fa-stop"></i> Stop
+                        </button>
+                        <button type="button" class="btn btn-block btn-airbus-alt" ng-click="processCtrl.clear()"
+                                ng-show="processCtrl.exec.status !== 'running' && processCtrl.exec.status !== 'paused'">
+                            <i class="fa fa-trash"></i> Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Running Tasks -->
+        <div class="task" ng-repeat="task in processCtrl.exec.activities track by $index" ng-init="open = false">
+            <!-- Running Tasks / Headers -->
+            <div class="task-header row" ng-click="open = !open">
+                <div class="col-xs-6 task-name" title="{{task.name}}">
+                    <i ng-show="task.nb_jobs_failed" class="fa fa-warning"></i>{{task.name}}
+                </div>
+                <div class="col-xs-6">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" ng-style="{width: task.completion + '%'}"
+                             ng-class="{'progress-bar-success': task.status !== 'failed', 'progress-bar-danger': task.status === 'failed'}"></div>
+                        <div class="progress-value">{{task | progress}}</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Running Tasks / Details -->
+            <div ng-if="open" class="task-details row">
+                <div class="col-xs-6 jobs">
+                    <div class="well">
+                        <h5>Jobs</h5>
+                        <p>Total : {{task.nb_jobs}}</p>
+                        <p>Pending : {{task.nb_jobs - task.nb_jobs_running - task.nb_jobs_done - task.nb_jobs_failed}}</p>
+                        <p>Running : {{task.nb_jobs_running}}</p>
+                        <p>Done : {{task.nb_jobs_done}}</p>
+                        <p>Failed : {{task.nb_jobs_failed}}</p>
+                    </div>
+                </div>
+                <div class="col-xs-6 dates">
+                    <p>Started : {{task.start_date | date:'shortTime'}}</p>
+                    <p>Estimated End : {{(processCtrl.estimateEnd(task) | date:'short') || '---'}}</p>
+                    <p>Duration : ---</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Tasks -->
+        <div class="task pending" ng-repeat="task in processCtrl.mockPendingTasks()">
+            <!-- Pending Tasks / Headers -->
+            <div class="task-header row">
+                <div class="col-xs-6 task-name" ng-bind="task"></div>
+                <div class="col-xs-6">
+                    <div class="progress">
+                        <div class="progress-value">Pending</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

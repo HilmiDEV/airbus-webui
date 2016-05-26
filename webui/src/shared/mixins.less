@@ -1,0 +1,109 @@
+
+// Utilities
+// ----------
+
+.box-shadow(@box-shadow) {
+  -webkit-box-shadow: @box-shadow;
+     -moz-box-shadow: @box-shadow;
+          box-shadow: @box-shadow;
+}
+
+.size(@width, @height: @width) {
+  width: @width;
+  height: @height;
+}
+
+.text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.abs-top-left(@top: 0, @left: @top) {
+  position: absolute;
+  top: @top;
+  left: @left;
+}
+
+.abs-top-right(@top: 0, @right: @top) {
+  position: absolute;
+  top: @top;
+  right: @right;
+}
+
+.abs-bottom-left(@bottom: 0, @left: @bottom) {
+  position: absolute;
+  bottom: @bottom;
+  left: @left;
+}
+
+.abs-bottom-right(@bottom: 0, @right: @bottom) {
+  position: absolute;
+  bottom: @bottom;
+  right: @right;
+}
+
+// Buttons
+// ----------
+
+.reset-browser-button() {
+  border: 0;
+  background: transparent no-repeat center center;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.button-variant(@color; @background; @border) {
+  color: @color;
+  background-color: @background;
+  border-color: @border;
+
+  &:focus,
+  &.focus {
+    color: @color;
+    background-color: darken(@background, 10%);
+    border-color: darken(@border, 25%);
+  }
+  &:hover {
+    color: @color;
+    background-color: darken(@background, 10%);
+    border-color: darken(@border, 12%);
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    color: @color;
+    background-color: darken(@background, 10%);
+    border-color: darken(@border, 12%);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: @color;
+      background-color: darken(@background, 17%);
+      border-color: darken(@border, 25%);
+    }
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: @background;
+      border-color: @border;
+    }
+  }
+
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
+}

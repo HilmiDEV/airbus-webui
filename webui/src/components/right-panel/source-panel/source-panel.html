@@ -1,0 +1,75 @@
+<div class="header">
+    Add layers
+    <button type="button" class="dismiss" ng-click="panelCtrl.close()" title="Close the panel">
+        <i class="fa fa-caret-right"></i>
+    </button>
+</div>
+<div class="content" ng-form="sourceForm">
+    <div class="content-inner">
+        <form>
+            <div class="form-group">
+                <label for="sourceUrl" class="control-label">Service URL</label>
+                <div class="input-group">
+                    <input id="sourceUrl"
+                           type="text"
+                           class="form-control"
+                           required ng-model="sourceCtrl.url"
+                           autofocus
+                           placeholder="http://"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-success"
+                                ng-click="sourceCtrl.loadLayersFromUrl()"
+                                ng-disabled="sourceForm.$invalid"
+                                type="submit"
+                                ng-if="!sourceCtrl.showLoader">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <span class="btn btn-default loader"
+                              ng-if="sourceCtrl.showLoader">
+                            <img src="img/loader.gif"/>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </form>
+        <div class="divider"></div>
+        <div ng-switch="sourceCtrl.layersType">
+
+            <div ng-switch-when="WMS">
+                <div class="layer" ng-repeat="layer in sourceCtrl.availableLayers" ng-click="sourceCtrl.select(layer)" ng-class="{selected: sourceCtrl.isSelected(layer)}">
+                    <h5 title="{{::(layer.Title || layer.Name)}}" ng-bind="::(layer.Title || layer.Name)"></h5>
+                    <div class="details row">
+                        <div class="left col-xs-7">
+                            <p>Name : {{::layer.Name}}</p>
+                        </div>
+                        <div class="right text-right col-xs-5">
+                            <img ng-src="{{::layer.overviewUrl}}" class="img-thumbnail" alt="No preview"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-switch-when="WMTS">
+                <div class="layer" ng-repeat="layer in sourceCtrl.availableLayers" ng-click="sourceCtrl.select(layer)" ng-class="{selected: sourceCtrl.isSelected(layer)}">
+                    <h5 title="{{::(layer.Title || layer.Identifier)}}" ng-bind="::(layer.Title || layer.Identifier)"></h5>
+                    <div class="details row">
+                        <div class="left col-xs-7">
+                            <p>Name : {{::layer.Identifier}}</p>
+                        </div>
+                        <div class="right text-right col-xs-5">
+                            <img src="" class="img-thumbnail" alt="No preview"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="footer">
+    <button type="button"
+            class="btn btn-default pull-right"
+            ng-click="sourceCtrl.addLayers()">
+        Add layers
+    </button>
+</div>

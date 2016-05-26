@@ -1,0 +1,68 @@
+<div class="header">
+    Layers Control
+    <button type="button" class="dismiss" ng-click="panelCtrl.close()" title="Close the panel">
+        <i class="fa fa-caret-right"></i>
+    </button>
+</div>
+<div class="content">
+    <div class="content-inner">
+        <div class="layer" ol-repeat="layer in layersCtrl.collection()" ol-repeat-reverse="true">
+            <div class="layer-header" title="Open advanced options" ng-click="open = !open">
+                {{::layer.title}}
+                <button type="button" title="Show/Hide layer" ng-click="layer.visible = !layer.visible; $event.stopPropagation()">
+                    <i class="fa" ng-class="{'fa-eye': layer.visible, 'fa-eye-slash': !layer.visible}"></i>
+                </button>
+            </div>
+            <div class="layer-options row" ng-if="open">
+                <div class="col-xs-5">
+                    <!-- Overview -->
+                    <div class="overview-container">
+                        <div class="overview-ratio"></div>
+                        <div class="overview-center">
+                            <img ol-layer-overview="$getItem()" alt="No preview"/>
+                            <div class="overview-glass" title="Click to zoom to layer" ng-click="layersCtrl.zoomToLayer($getItem())"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-7">
+                    <!-- Actions -->
+                    <div class="form-group">
+                        <button type="button" title="Move Up" class="btn btn-airbus" ng-click="$move(+1)" ng-disabled="$first">
+                            <i class="fa fa-chevron-up"></i>
+                        </button>
+                        <button type="button" title="Move Down" class="btn btn-airbus" ng-click="$move(-1)" ng-disabled="$last">
+                            <i class="fa fa-chevron-down"></i>
+                        </button>
+                        <button type="button" title="Remove" class="btn btn-airbus" ng-click="$remove()">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                    <!-- Opacity -->
+                    <div class="form-group">
+                        <label class="control-label">Opacity : {{(layer.opacity * 100) | number:0}}%</label>
+                        <rzslider rz-slider-model="layer.opacity" rz-slider-options="layersCtrl.opacitySliderOptions"></rzslider>
+                    </div>
+                    <!-- Gamma correction -->
+                    <div class="form-group">
+                        <label class="control-label">Gamma correction : {{layer.gamma}}</label>
+                        <rzslider rz-slider-model="layer.gamma" rz-slider-options="layersCtrl.gammaSliderOptions"></rzslider>
+                    </div>
+                </div>
+                <div class="col-xs-12 form-horizontal">
+                    <!-- Radiometric correction -->
+                    <h5>Radiometric correction :</h5>
+                    <div class="form-group">
+                        <label for="radioMin" class="control-label text-right col-xs-2">Min :</label>
+                        <div class="col-xs-4">
+                            <input id="radioMin" type="number" class="form-control" min="0" max="100" ng-model="layer.rad_min"/>
+                        </div>
+                        <label for="radioMax" class="control-label text-right col-xs-2">Max :</label>
+                        <div class="col-xs-4">
+                            <input id="radioMax" type="number" class="form-control" min="0" max="100" ng-model="layer.rad_max"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

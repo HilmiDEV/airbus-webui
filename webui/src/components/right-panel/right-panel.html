@@ -1,0 +1,5 @@
+<layers-panel ng-if="panelCtrl.isOpen('layers')" ng-hide="panelCtrl.isPaused('layers')"></layers-panel>
+<source-panel class="has-footer" ng-if="panelCtrl.isOpen('source')" ng-hide="panelCtrl.isPaused('source')"></source-panel>
+<filters-panel class="has-footer" ng-if="panelCtrl.isOpen('filters')" ng-hide="panelCtrl.isPaused('filters')"></filters-panel>
+<process-panel ng-if="panelCtrl.isOpen('process')" ng-hide="panelCtrl.isPaused('process')"></process-panel>
+<settings-panel class="has-footer" ng-if="panelCtrl.isOpen('settings')" ng-hide="panelCtrl.isPaused('settings')"></settings-panel>

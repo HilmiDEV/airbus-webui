@@ -1,0 +1,25 @@
+footer {
+  .box-shadow(0 0 12px rgba(0, 0, 0, .2));
+  z-index: 2;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
+  padding: 0 85px;
+  background-color: fade(@main-color-1, 50%);
+
+  @import "map-orientation/map-orientation";
+
+  @import "map-scale/map-scale";
+
+  @import "mouse-position/mouse-position";
+
+  @import "mouse-color/mouse-color";
+
+  > a.airbus-logo {
+    display: block;
+    height: 100%;
+    float: right;
+  }
+}

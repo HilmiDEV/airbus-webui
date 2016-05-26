@@ -1,0 +1,81 @@
+diff --git a/src/ol/format/wmscapabilitiesformat.js b/src/ol/format/wmscapabilitiesformat.js
+index d580420..1a7b1df 100644
+--- a/src/ol/format/wmscapabilitiesformat.js
++++ b/src/ol/format/wmscapabilitiesformat.js
+@@ -117,11 +117,18 @@ ol.format.WMSCapabilities.readBoundingBox_ = function(node, objectStack) {
+     ol.format.XSD.readDecimalString(node.getAttribute('resy'))
+   ];
+ 
+-  return {
+-    'crs': node.getAttribute('CRS'),
+-    'extent': extent,
+-    'res': resolutions
+-  };
++    var obj = {
++        'extent': extent,
++        'res': resolutions
++    };
++    var crs = node.getAttribute('CRS');
++    var srs = node.getAttribute('SRS');
++    if (goog.isDefAndNotNull(crs)) {
++        goog.object.set(obj, 'crs', crs);
++    }else if (goog.isDefAndNotNull(srs)) {
++        goog.object.set(obj, 'srs', srs);
++    }
++    return obj;
+ };
+ 
+ 
+@@ -162,6 +169,24 @@ ol.format.WMSCapabilities.readEXGeographicBoundingBox_ =
+   ]);
+ };
+ 
++/**
++ * @private
++ * @param {Node} node Node.
++ * @param {Array.<*>} objectStack Object stack.
++ * @return {Object} Bounding box object.
++ */
++ol.format.WMSCapabilities.readLatLonBoundingBox_ = function(node, objectStack) {
++    goog.asserts.assert(node.nodeType == goog.dom.NodeType.ELEMENT);
++    goog.asserts.assert(node.localName == 'LatLonBoundingBox');
++    var extent = [
++        ol.format.XSD.readDecimalString(node.getAttribute('minx')),
++        ol.format.XSD.readDecimalString(node.getAttribute('miny')),
++        ol.format.XSD.readDecimalString(node.getAttribute('maxx')),
++        ol.format.XSD.readDecimalString(node.getAttribute('maxy'))
++    ];
++    return extent;
++};
++
+ 
+ /**
+  * @param {Node} node Node.
+@@ -341,7 +366,7 @@ ol.format.WMSCapabilities.readLayer_ = function(node, objectStack) {
+   layerObject['fixedHeight'] = fixedHeight;
+ 
+   // See 7.2.4.8
+-  var addKeys = ['Style', 'CRS', 'AuthorityURL'];
++  var addKeys = ['Style', 'CRS', 'SRS', 'AuthorityURL'];
+   addKeys.forEach(function(key) {
+     if (key in parentLayerObject) {
+       var childValue = goog.object.setIfUndefined(layerObject, key, []);
+@@ -350,7 +375,7 @@ ol.format.WMSCapabilities.readLayer_ = function(node, objectStack) {
+     }
+   });
+ 
+-  var replaceKeys = ['EX_GeographicBoundingBox', 'BoundingBox', 'Dimension',
++  var replaceKeys = ['LatLonBoundingBox', 'EX_GeographicBoundingBox', 'BoundingBox', 'Dimension',
+     'Attribution', 'MinScaleDenominator', 'MaxScaleDenominator'];
+   replaceKeys.forEach(function(key) {
+     if (!(key in layerObject)) {
+@@ -710,6 +735,9 @@ ol.format.WMSCapabilities.LAYER_PARSERS_ = ol.xml.makeStructureNS(
+       'KeywordList': ol.xml.makeObjectPropertySetter(
+           ol.format.WMSCapabilities.readKeywordList_),
+       'CRS': ol.xml.makeObjectPropertyPusher(ol.format.XSD.readString),
++      'SRS': ol.xml.makeObjectPropertyPusher(ol.format.XSD.readString),
++      'LatLonBoundingBox': ol.xml.makeObjectPropertySetter(
++          ol.format.WMSCapabilities.readLatLonBoundingBox_),
+       'EX_GeographicBoundingBox': ol.xml.makeObjectPropertySetter(
+           ol.format.WMSCapabilities.readEXGeographicBoundingBox_),
+       'BoundingBox': ol.xml.makeObjectPropertyPusher(

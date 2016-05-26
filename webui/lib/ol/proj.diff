@@ -1,0 +1,12 @@
+diff --git a/src/ol/proj/proj.js b/src/ol/proj/proj.js
+index e4f0d13..2488e19 100644
+--- a/src/ol/proj/proj.js
++++ b/src/ol/proj/proj.js
+@@ -256,6 +256,7 @@ ol.proj.Projection.prototype.getWorldExtent = function() {
+  * wnu - westing, northing, up - some planetary coordinate systems have
+  *     "west positive" coordinate systems
+  * @return {string} Axis orientation.
++ * @api stable
+  */
+ ol.proj.Projection.prototype.getAxisOrientation = function() {
+   return this.axisOrientation_;

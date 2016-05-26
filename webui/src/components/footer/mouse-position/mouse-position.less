@@ -1,0 +1,48 @@
+mouse-position {
+  .size(auto, 100%);
+  display: block;
+  float: left;
+  padding: 15px;
+  line-height: 20px;
+  color: @font-color-dark;
+
+  > * {
+    display: inline-block;
+  }
+
+  // Drop up
+  // ----------
+
+  > .dropup {
+
+    > button {
+      .reset-browser-button();
+      padding: 0;
+      margin: 0;
+      color: @main-color-2;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    > .dropdown-menu > li.active > a {
+      background-color: @font-color-link;
+    }
+  }
+
+  // OL override
+  // ----------
+
+  > .ol-mouse-position {
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
+  }
+}

@@ -1,0 +1,35 @@
+annotations-menu {
+  > div {
+    position: absolute;
+    width: 260px;
+    color: @font-color-light;
+    top:40%;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+
+    p {
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.8);
+    }
+    &.left {
+      left: 30px;
+
+      > i {
+        float: left;
+        font-size: 3em;
+        margin-right: 30px;
+        margin-top: 15px;
+      }
+    }
+    &.right {
+      right: 30px;
+
+      > i {
+        float: right;
+        font-size: 3em;
+        margin-left: 30px;
+        margin-top: 15px;
+      }
+    }
+  }
+}

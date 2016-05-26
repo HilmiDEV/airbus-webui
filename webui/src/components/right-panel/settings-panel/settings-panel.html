@@ -1,0 +1,107 @@
+<div class="header">
+    Settings
+    <button type="button" class="dismiss" ng-click="panelCtrl.close()" title="Close the panel">
+        <i class="fa fa-caret-right"></i>
+    </button>
+</div>
+<div class="content form-horizontal" ng-form="settingsForm">
+    <div class="content-inner">
+        <h4>Basemap</h4>
+        <div class="form-group">
+            <label for="basemapSource" class="col-xs-4 control-label">Layer URL</label>
+            <!--<label for="source" class="col-xs-4 control-label">Layer</label>-->
+            <div class="col-xs-8">
+                <input id="basemapSource" type="text" class="form-control" required ng-model="settingsCtrl.basemapUrl" placeholder="Layer GetMap request">
+                <!--<button id="source" type="button" class="btn btn-default" ng-click="panelCtrl.open('source').then(settingsCtrl.handleSource)">Select a layer</button>-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="basemapTileSize" class="col-xs-4 control-label">Tile size</label>
+            <div class="col-xs-6">
+                <input id="basemapTileSize" type="number" class="form-control" required ng-model="settingsCtrl.tileSize" placeholder="Tile size">
+            </div>
+        </div>
+        <h5>Default extent</h5>
+        <div class="form-group">
+            <label for="basemapNorth" class="col-xs-offset-3 col-xs-2 control-label">North</label>
+            <div class="col-xs-4">
+                <input id="basemapNorth" type="number" class="form-control" required ng-model="settingsCtrl.basemap.extent[3]" placeholder="North">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="basemapEast" class="col-xs-2 control-label">West</label>
+            <div class="col-xs-4">
+                <input id="basemapEast" type="number" class="form-control" required ng-model="settingsCtrl.basemap.extent[0]" placeholder="West">
+            </div>
+            <label for="basemapWest" class="col-xs-2 control-label">East</label>
+            <div class="col-xs-4">
+                <input id="basemapWest" type="number" class="form-control" required ng-model="settingsCtrl.basemap.extent[2]" placeholder="East">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="basemapSouth" class="col-xs-offset-3 col-xs-2 control-label">South</label>
+            <div class="col-xs-4">
+                <input id="basemapSouth" type="number" class="form-control" required ng-model="settingsCtrl.basemap.extent[1]" placeholder="South">
+            </div>
+        </div>
+        <div class="divider"></div>
+
+        <h4>Default correction</h4>
+        <h5>Radiometric correction</h5>
+        <div class="form-group">
+            <label for="correctRadMin" class="col-xs-2 control-label">Min.</label>
+            <div class="col-xs-4">
+                <input id="correctRadMin" type="number" class="form-control" required ng-model="settingsCtrl.correction.rad_min" placeholder="Min.">
+            </div>
+            <label for="correctRadMax" class="col-xs-2 control-label">Max.</label>
+            <div class="col-xs-4">
+                <input id="correctRadMax" type="number" class="form-control" required ng-model="settingsCtrl.correction.rad_max" placeholder="Max.">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="correctGamma" class="col-xs-4 control-label">Gamma correct.</label>
+            <div class="col-xs-4">
+                <input id="correctGamma" type="number" class="form-control" required ng-model="settingsCtrl.correction.gamma" placeholder="Gamma">
+            </div>
+        </div>
+        <div class="divider"></div>
+
+        <h4>Web Processing Service</h4>
+        <div class="form-group">
+            <label for="wpsWorkspace" class="col-xs-4 control-label">Workspace</label>
+            <div class="col-xs-6">
+                <input id="wpsWorkspace" type="text" class="form-control" required ng-model="settingsCtrl.wps.workspace" placeholder="Workspace identifier">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="wpsUrl" class="col-xs-4 control-label">Service URL</label>
+            <div class="col-xs-8">
+                <input id="wpsUrl" type="url" class="form-control" required ng-model="settingsCtrl.wps.url" placeholder="Service URL">
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="col-xs-4 control-label">Service version</span>
+            <div class="col-xs-8">
+                <div class="radio">
+                    <label>
+                        <input name="wpsVersion" type="radio" value="1.0.0" ng-model="settingsCtrl.wps.version">1.0.0
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input name="wpsVersion" type="radio" value="2.0.0" ng-model="settingsCtrl.wps.version">2.0.0
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="wpsRefresh" class="col-xs-4 control-label">Refresh freq.</label>
+            <div class="col-xs-4">
+                <select id="wpsRefresh" class="form-control" ng-model="settingsCtrl.wps.refresh" ng-options="o.value as o.label for o in settingsCtrl.refreshOptions"></select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer text-right">
+    <button type="button" class="btn btn-airbus" ng-click="settingsCtrl.save()" ng-disabled="settingsForm.$invalid">Save settings</button>
+</div>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Airbus Web UI</title>
+
+        <link href="css/ol.min.css" rel="stylesheet">
+        <link href="css/font-awesome.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-datepicker.min.css" rel="stylesheet">
+        <link href="css/angular-slider.min.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
+    </head>
+    <body ng-cloak ng-init="annot = {hide:false};">
+        <main-map></main-map>
+        <left-menu ng-mouseover="annot.hide = true;"></left-menu>
+        <right-menu ng-mouseover="annot.hide = true;"></right-menu>
+        <right-panel></right-panel>
+        <footer></footer>
+        <annotations-menu ng-show="!annot.hide"></annotations-menu>
+
+        <notify as="notification">
+            <div class="bubble" title="Click to close" ng-click="notification.close()">
+                <div class="bubble-icon">
+                    <i class="fa" ng-class="notification.level"></i>
+                </div>
+                <div class="bubble-msg" ng-bind="::notification.content"></div>
+            </div>
+        </notify>
+
+        <script src="js/proj4.min.js"></script>
+        <script src="js/ol.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/moment.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/bootstrap-datepicker.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-ol.min.js"></script>
+        <script src="js/angular-notify.min.js"></script>
+        <script src="js/angular-slider.min.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+@import "shared/variables";
+@import "shared/mixins";
+
+// General
+// ----------
+
+html, body {
+  height: 100%;
+  width: 100%;
+  background-color: @main-color-1;
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+}
+
+[ng-cloak] {
+  display: none !important;
+}
+
+
+// Buttons
+// ----------
+
+.btn-airbus {
+  .button-variant(@font-color-light, @main-color-4, @main-color-5);
+}
+
+.btn-airbus-alt {
+  .button-variant(@alt-color-2, @main-color-1, @alt-color-2);
+}
+
+
+// Components
+// ----------
+
+left-menu, right-menu {
+  .size(75px, 100%);
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  display: table;
+
+  &:hover {
+    background: fade(@main-color-2, 80%);
+    .box-shadow(0 0 12px rgba(0, 0, 0, .5));
+
+    > ul {
+      display: table-cell;
+    }
+  }
+
+  > ul {
+    display: none;
+    list-style: none;
+    vertical-align: middle;
+    padding: 0;
+
+    > li {
+      .size(100%, 80px);
+
+      button {
+        .reset-browser-button();
+        .size(100%, 100%);
+        padding: 0;
+      }
+    }
+  }
+}
+
+@import "components/annotations-menu/annotations-menu";
+@import "components/footer/footer";
+@import "components/left-menu/left-menu";
+@import "components/main-map/main-map";
+@import "components/notify/notify";
+@import "components/right-menu/right-menu";
+@import "components/right-panel/right-panel";

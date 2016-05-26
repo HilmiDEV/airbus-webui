@@ -1,0 +1,28 @@
+{
+  "basemap": {
+    "projection": "CRS:84",
+    "extent": [-126.298828125, -54.404296875, 8.173828125, 0.615234375],
+    "source": {
+      "type": "TileWMS",
+      "url": "http://neowms.sci.gsfc.nasa.gov/wms/wms",
+      "tileSize": 256,
+      "params": {
+        "layers": "BlueMarbleNG-TB",
+        "format": "image/jpeg"
+      }
+    }
+  },
+
+  "correction": {
+    "rad_min": 0.0,
+    "rad_max": 100.0,
+    "gamma": 1.0
+  },
+
+  "wps": {
+    "workspace": "GPF_THAI",
+    "url": "http://localhost:8180/constellation/WS/wps/mywps",
+    "version": "1.0.0",
+    "refresh": 5000
+  }
+}

@@ -1,0 +1,163 @@
+process-panel {
+
+  div.header {
+    background-image: url(../img/process.png);
+  }
+
+  ul.tabs {
+    position: absolute;
+    right: 100%;
+    top: 110px;
+    list-style: none;
+
+    > li {
+      .box-shadow(inset -3px 0 5px rgba(0, 0, 0, .25));
+      padding: 0;
+      margin: 0 0 8px;
+      background-color: @main-color-2;
+      border: 1px solid @main-color-3;
+      border-right: none;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+
+      &.active {
+        background-color: @main-color-3;
+        border-color: @main-color-4;
+      }
+
+      > button {
+        .reset-browser-button();
+        .text-overflow();
+        color: @font-color-light;
+        width: 120px;
+        padding: 12px 15px;
+      }
+    }
+  }
+
+  div.content {
+
+    > div.content-inner {
+      padding: 0;
+
+      // Progress Bars
+      // ----------
+
+      .progress {
+        height: 34px;
+        position: relative;
+        text-align: center;
+        border: 2px solid @main-color-1;
+        background-color: transparent;
+
+        > .progress-value {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          line-height: 30px;
+          font-weight: 700;
+        }
+      }
+
+      // Process
+      // ----------
+
+      .process {
+        padding: 20px;
+        background-color: @alt-color-1;
+
+        h4 {
+          margin-top: 0;
+          margin-bottom: 15px;
+        }
+
+        .progress {
+          margin-bottom: 15px;
+        }
+
+        .dates > p:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      // Task
+      // ----------
+
+      .task {
+        display: block;
+        border-bottom: 1px solid @main-color-1;
+
+        // Task > Header
+        // ----------
+
+        > .task-header {
+          padding: 12px 20px;
+          border-bottom: @main-color-1;
+          cursor: pointer;
+
+          .task-name {
+            .text-overflow();
+            font-size: 16px;
+            line-height: 30px;
+            font-weight: 700;
+            padding-right: 0;
+
+            > .fa-warning {
+              color: #eea236;
+              line-height: 30px;
+              margin-right: 10px;
+            }
+          }
+
+          .progress {
+            height: 30px;
+            margin-bottom: 0;
+
+            > .progress-value {
+              line-height: 26px;
+            }
+          }
+        }
+
+        &.pending > .task-header {
+          cursor: default;
+        }
+
+        // Task > Details
+        // ----------
+
+        > .task-details {
+          padding: 10px 20px 20px 20px;
+
+          .well {
+            padding: 15px;
+            color: @main-color-2;
+            background-color: @alt-color-1;
+            border-color: #61738F;
+            margin-bottom: 0;
+
+            > h5 {
+              color: @main-color-1;
+              font-weight: bold;
+              margin-top: 0;
+              margin-bottom: 15px;
+            }
+
+            > p {
+              padding-left: 10px;
+              margin-bottom: 6px;
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+          }
+
+          .dates {
+            padding-top: 10px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+diff --git a/src/ol/source/wmtssource.js b/src/ol/source/wmtssource.js
+index 77c322a..be05cc3 100644
+--- a/src/ol/source/wmtssource.js
++++ b/src/ol/source/wmtssource.js
+@@ -385,10 +385,7 @@ ol.source.WMTS.optionsFromCapabilities = function(wmtsCap, config) {
+     l['Dimension'].forEach(function(elt, index, array) {
+       var key = elt['Identifier'];
+       var value = elt['Default'];
+-      if (value !== undefined) {
+-        goog.asserts.assert(ol.array.includes(elt['Value'], value),
+-            'default value contained in values');
+-      } else {
++      if (value === undefined) {
+         value = elt['Value'][0];
+       }
+       goog.asserts.assert(value !== undefined, 'value could be found');

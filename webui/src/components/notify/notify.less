@@ -1,0 +1,89 @@
+@notify-icon-size: 30px;
+@notify-icon-padding: 20px;
+
+@notify-color-info: @main-color-2;
+@notify-color-warn: #eea236;
+@notify-color-error: #d43f3a;
+
+body.right-panel-open notify {
+  right: 475px;
+}
+
+notify {
+  .abs-top-right(20px, 100px);
+  display: block;
+  z-index: 999;
+
+  .bubble {
+    .size(320px, auto);
+    .box-shadow(2px 2px 6px rgba(0, 0, 0, .2));
+    display: table;
+    table-layout: fixed;
+    cursor: pointer;
+    margin-bottom: 15px;
+    color: @font-color-light;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+
+    > .bubble-icon,
+    > .bubble-msg {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    > .bubble-icon {
+      .size(70px, auto);
+      padding: @notify-icon-padding;
+      background-color: rgba(255, 255, 255, .1);
+
+      > .fa {
+        .size(30px, 30px);
+        display: block;
+        font-size: 30px;
+        line-height: 1;
+        text-align: center;
+      }
+    }
+
+    > .bubble-msg {
+      padding: 15px;
+    }
+
+    // Level rules
+    // ----------
+
+    &.info {
+      background-color: fade(@notify-color-info, 90%);
+
+      > .bubble-icon > .fa:before {
+        content: "\f129"
+      }
+    }
+    &.warn {
+      background-color: fade(@notify-color-warn, 90%);
+
+      > .bubble-icon > .fa:before {
+        content: "\f071"
+      }
+    }
+    &.error {
+      background-color: fade(@notify-color-error, 90%);
+
+      > .bubble-icon > .fa:before {
+        content: "\f00d"
+      }
+    }
+    &.loading {
+      background-color: fade(@notify-color-info, 90%);
+
+      > .bubble-icon > .fa {
+        -webkit-animation: fa-spin 2s infinite linear;
+        animation: fa-spin 2s infinite linear;
+
+        &:before {
+          content: "\f1ce";
+        }
+      }
+    }
+  }
+}

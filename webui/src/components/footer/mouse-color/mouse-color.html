@@ -1,0 +1,4 @@
+<i class="fa fa-paint-brush"></i>
+<span>Reflectance :</span>
+<span ng-hide="mcCtrl.hover"><b>Band 0</b> | <b>Band 1</b> | <b>Band 2</b></span>
+<span ng-show="mcCtrl.hover"><b>{{mcCtrl.color[0]*(100/255.0) | number:2}}%</b> | <b>{{mcCtrl.color[1]*(100/255.0) | number:2}}%</b> | <b>{{mcCtrl.color[2]*(100/255.0) | number:2}}%</b></span>

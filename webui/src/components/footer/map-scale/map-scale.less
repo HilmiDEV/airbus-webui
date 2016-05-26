@@ -1,0 +1,25 @@
+map-scale {
+  .size(auto, 100%);
+  display: block;
+  float: left;
+
+  > .ol-scale-line {
+    .size(auto, 100%);
+    position: relative;
+    top: auto;
+    left: auto;
+    bottom: auto;
+    right: auto;
+    background: none;
+    border-radius: 0;
+    padding: 13px;
+
+    > .ol-scale-line-inner {
+      color: @font-color-dark;
+      border-color: @font-color-dark;
+      border-width: 2px;
+      line-height: 22px;
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,124 @@
+<div class="header">
+    Filters
+    <button type="button" class="dismiss" ng-click="panelCtrl.close()">
+        <i class="fa fa-caret-right"></i>
+    </button>
+</div>
+<div class="content" ng-form="filtersForm">
+    <div class="content-inner form-horizontal">
+        <h4>Selected filters</h4>
+        <ul class="tags">
+            <li class="tag" ng-show="filtersCtrl.isEmpty()">
+                None
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.spot67">
+                Sport 6/7
+                <i class="fa fa-times" ng-click="filtersCtrl.value.spot67 = false"></i>
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.deimos">
+                Deimos
+                <i class="fa fa-times" ng-click="filtersCtrl.value.deimos = false"></i>
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.pleiades">
+                Pleiades
+                <i class="fa fa-times" ng-click="filtersCtrl.value.pleiades = false"></i>
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.terrasar">
+                TerraSAR
+                <i class="fa fa-times" ng-click="filtersCtrl.value.terrasar = false"></i>
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.sortBy === 'cloud'">
+                Sort by cloud
+                <i class="fa fa-times" ng-click="filtersCtrl.value.sortBy = null"></i>
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.sortBy === 'age_asc'">
+                Sort by age (ASC)
+                <i class="fa fa-times" ng-click="filtersCtrl.value.sortBy = null"></i>
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.sortBy === 'age_desc'">
+                Sort by age (DESC)
+                <i class="fa fa-times" ng-click="filtersCtrl.value.sortBy = null"></i>
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.date">
+                {{filtersCtrl.value.date | date:'yyyy-MM-dd'}}
+                <i class="fa fa-times" ng-click="filtersCtrl.value.date = null"></i>
+            </li>
+            <li class="tag" ng-show="filtersCtrl.value.eachYear">
+                Each year
+                <i class="fa fa-times" ng-click="filtersCtrl.value.eachYear = false"></i>
+            </li>
+        </ul>
+        <div class="divider"></div>
+
+        <h4>Sensors</h4>
+        <div class="form-group">
+            <div class="col-xs-5 col-xs-offset-1">
+                <div class="checkbox">
+                    <label>
+                        <input name="spot67" type="checkbox" ng-model="filtersCtrl.value.spot67"/>Spot 6/7
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input name="deimos" type="checkbox" ng-model="filtersCtrl.value.deimos"/>Deimos
+                    </label>
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="checkbox">
+                    <label>
+                        <input name="pleiades" type="checkbox" ng-model="filtersCtrl.value.pleiades"/>Pleiades
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input name="terrasar" type="checkbox" ng-model="filtersCtrl.value.terrasar"/>TerraSAR
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="divider"></div>
+
+        <h4>Sort by</h4>
+        <div class="form-group">
+            <div class="radio col-xs-11 col-xs-offset-1">
+                <label>
+                    <input name="criteria" type="radio" value="cloud" ng-model="filtersCtrl.value.sortBy">Cloud
+                </label>
+            </div>
+            <div class="radio col-xs-11 col-xs-offset-1">
+                <label>
+                    <input name="criteria" type="radio" value="age_asc" ng-model="filtersCtrl.value.sortBy">Age (ASC)
+                </label>
+            </div>
+            <div class="radio col-xs-11 col-xs-offset-1">
+                <label>
+                    <input name="criteria" type="radio" value="age_desc" ng-model="filtersCtrl.value.sortBy">Age (DESC)
+                </label>
+            </div>
+        </div>
+        <div class="divider"></div>
+
+        <h4>Date</h4>
+        <div class="form-group">
+            <div class="col-xs-7 col-xs-offset-1">
+                <div class="input-group date" datepicker="{language: 'en', format: 'yyyy-mm-dd'}">
+                    <input name="date" type="text" class="form-control" ng-model="filtersCtrl.value.date">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-th"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox col-xs-11 col-xs-offset-1">
+                <label>
+                    <input name="eachYear" type="checkbox" ng-model="filtersCtrl.value.eachYear"/>Each year
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer text-right">
+    <button type="button" class="btn btn-airbus" ng-click="filtersCtrl.apply()" ng-disabled="filtersForm.$invalid">Save filters</button>
+</div>
